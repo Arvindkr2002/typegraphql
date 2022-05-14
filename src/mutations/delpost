@@ -1,0 +1,23 @@
+import { Resolver, Query, Ctx } from "type-graphql";
+import { user } from "../entity/user";
+import { post } from "../entity/post";
+import { MyContext } from "../../MyContent";
+
+
+    if (Ctx.req.session!.userId) {
+        @Resolver()
+        export class DPostResolver {
+          @Mutation(() => post, { nullable: true })
+          async post(
+            @Arg("title") title: string,
+            @Arg("By") By: user,
+          ): Promise<User> {
+            const user = await post.delete({
+              title,
+              By
+            }).save();
+        
+            return post;
+          }
+        }
+    }
